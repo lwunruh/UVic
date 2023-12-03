@@ -1,0 +1,26 @@
+Algorithm inPlacePartition(S, a, b):
+Input: An array, S, of distinct elements; integers a and b such that a ≤ b
+Output: An integer, l, such that the subarray S[a .. b] is partitioned into S[a..l −
+1] and S[l..b] so that every element in S[a..l − 1] is less than each element in
+S[l..b]
+Let r be a random integer in the range [a, b]
+Swap S[r] and S[b]
+p ← S[b] // the pivot
+l ← a // l will scan rightward
+r ← b − 1 // r will scan leftward
+while l ≤ r do // find an element larger than the pivot
+while l ≤ r and S[l] ≤ p do
+l ← l + 1
+while r ≥ l and S[r] ≥ p do // find an element smaller than the pivot
+r ← r − 1
+if l < r then
+Swap S[l] and S[r]
+Swap S[l] and S[b] // put the pivot into its final place
+return l
+Algorithm inPlaceQuickSort(S, a, b):
+Input: An array, S, of distinct elements; integers a and b
+Output: The subarray S[a .. b] arranged in nondecreasing order
+if a ≥ b then return // subrange with 0 or 1 elements
+l ← inPlacePartition(S, a, b)
+inPlaceQuickSort(S, a, l − 1)
+inPlaceQuickSort(S, l + 1, b)
